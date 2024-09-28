@@ -5,7 +5,7 @@ export default function Numpad({ number, setNumber, storedValue }) {
   function handleNumber(e) {
     // Ignore clicks on div container
     if (e.target.getAttribute("class") === "numbers") {
-      return
+      return;
     }
 
     // Get the digit from the button clicked
@@ -14,10 +14,16 @@ export default function Numpad({ number, setNumber, storedValue }) {
     // Handle Clear button press
     // TODO: Would be better to handle it with event handle click?
     if (newDigit == "Clear") {
-      handleClear(e);
+      handleClear(e)
       return
     } else if (newDigit === "Recall") {
-        setNumber(storedValue)
+      setNumber(storedValue)
+      return
+    } else if (newDigit === ".") {
+        if (number.includes('.')) {
+            return
+        }
+        setNumber(number + newDigit)
         return
     }
 
@@ -46,6 +52,7 @@ export default function Numpad({ number, setNumber, storedValue }) {
           <button>0</button>
           <button>Clear</button>
           <button>Recall</button>
+          <button>.</button>
         </div>
       </div>
     </>
