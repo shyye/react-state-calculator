@@ -13,8 +13,8 @@ function App() {
       return;
     }
 
-    // Reset number on Clear
-    const number = e.target.textContent === "Clear" ? 0 : e.target.textContent;
+    // Reset number to 0 on button press 'Clear'
+    let number = e.target.textContent === "Clear" ? 0 : e.target.textContent;
 
     // Check if first or second number should be updated
     const parentClass = e.currentTarget.getAttribute("id");
@@ -22,10 +22,17 @@ function App() {
       ? setFirstNumber(number)
       : setSecondNumber(number);
 
+    // Update number
     if (parentClass === "first-number") {
+      // Append digit if not 0
+      number = firstNumber === 0 ? number : (firstNumber + number)
       setFirstNumber(number);
+
     } else if (parentClass === "second-number") {
+      // Append digit if not 0
+      number = secondNumber === 0 ? number : (secondNumber + number)
       setSecondNumber(number);
+
     }
   }
 
