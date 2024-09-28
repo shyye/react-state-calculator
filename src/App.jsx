@@ -23,23 +23,23 @@ function App() {
     switch (operator) {
       case "+":
         setSum(first + second);
-        break;
+        break
 
       case "-":
         setSum(first - second);
-        break;
+        break
 
       case "*":
         setSum(first * second);
-        break;
+        break
 
       case "÷":
         setSum(first / second);
-        break;
+        break
 
       default:
         setSum(-1);
-        break;
+        break
     }
   }
 
@@ -67,7 +67,7 @@ function App() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 export default App;
