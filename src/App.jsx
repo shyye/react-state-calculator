@@ -13,8 +13,15 @@ function App() {
       return;
     }
 
-    // Reset number to 0 on button press 'Clear'
-    let number = e.target.textContent === "Clear" ? 0 : e.target.textContent;
+    // Get the digit from the
+    let number = e.target.textContent;
+
+    // Handle Clear button press
+    // TODO: Would be better to handle it with event handle click?
+    if (number == 'Clear') {
+      handleClear(e)
+      return
+    }
 
     // Check if first or second number should be updated
     const parentClass = e.currentTarget.getAttribute("id");
@@ -25,14 +32,12 @@ function App() {
     // Update number
     if (parentClass === "first-number") {
       // Append digit if not 0
-      number = firstNumber === 0 ? number : (firstNumber + number)
+      number = firstNumber === 0 ? number : firstNumber + number;
       setFirstNumber(number);
-
     } else if (parentClass === "second-number") {
       // Append digit if not 0
-      number = secondNumber === 0 ? number : (secondNumber + number)
+      number = secondNumber === 0 ? number : secondNumber + number;
       setSecondNumber(number);
-
     }
   }
 
@@ -68,6 +73,21 @@ function App() {
       default:
         setSum(-1);
         break;
+    }
+  }
+
+  function handleClear(e) {
+    
+
+    // Check if first or second number should be updated
+    const parentClass = e.currentTarget.getAttribute("id")
+
+    // Update number
+    if (parentClass === "first-number") {
+      // Append digit if not 0
+      setFirstNumber(0);
+    } else if (parentClass === "second-number") {
+      setSecondNumber(0);
     }
   }
 
