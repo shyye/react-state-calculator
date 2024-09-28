@@ -1,7 +1,7 @@
 // PropTypes undefined issue, referemce: https://stackoverflow.com/a/52417058
 import PropTypes from "prop-types";
 
-export default function Numpad({ number, setNumber }) {
+export default function Numpad({ number, setNumber, storedValue }) {
   function handleNumber(e) {
     // Ignore clicks on div container
     if (e.target.getAttribute("class") === "numbers") {
@@ -16,6 +16,9 @@ export default function Numpad({ number, setNumber }) {
     if (newDigit == "Clear") {
       handleClear(e);
       return
+    } else if (newDigit === "Recall") {
+        setNumber(storedValue)
+        return
     }
 
     // Update number: Append digit to current number if not 0
@@ -42,6 +45,7 @@ export default function Numpad({ number, setNumber }) {
           <button>9</button>
           <button>0</button>
           <button>Clear</button>
+          <button>Recall</button>
         </div>
       </div>
     </>
@@ -51,4 +55,5 @@ export default function Numpad({ number, setNumber }) {
 Numpad.propTypes = {
   number: PropTypes.string,
   setNumber: PropTypes.func,
+  storedValue: PropTypes.string,
 };
