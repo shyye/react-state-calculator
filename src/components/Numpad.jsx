@@ -11,20 +11,19 @@ export default function Numpad({ number, setNumber, storedValue }) {
     // Get the digit from the button clicked
     let newDigit = e.target.textContent;
 
-    // Handle Clear button press
-    // TODO: Would be better to handle it with event handle click?
+    // TODO: Would be better to handle it with event handle click instead of checking the string value?
     if (newDigit == "Clear") {
-      handleClear(e)
-      return
+      handleClear(e);
+      return;
     } else if (newDigit === "Recall") {
-      setNumber(storedValue)
-      return
+      setNumber(storedValue);
+      return;
     } else if (newDigit === ".") {
-        if (number.includes('.')) {
-            return
-        }
-        setNumber(number + newDigit)
-        return
+      if (number.includes(".")) {
+        return;
+      }
+      setNumber(number + newDigit);
+      return;
     }
 
     // Update number: Append digit to current number if not 0

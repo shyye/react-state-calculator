@@ -3,55 +3,63 @@ import "./App.css";
 import Numpad from "./components/Numpad";
 
 function App() {
-  const [firstNumber, setFirstNumber] = useState('0');
-  const [secondNumber, setSecondNumber] = useState('0');
+  const [firstNumber, setFirstNumber] = useState("0");
+  const [secondNumber, setSecondNumber] = useState("0");
   const [operator, setOperator] = useState("+");
   const [sum, setSum] = useState(0);
-  const [storedValue, setStoredValue] = useState('0')
+  const [storedValue, setStoredValue] = useState("0");
 
   function handleOperator(e) {
     // Ignore clicks on div container
     if (e.target.getAttribute("class") === "numbers") {
       return;
     }
-    setOperator(e.target.textContent)
+    setOperator(e.target.textContent);
   }
 
   function handleCalculation() {
-    const first = parseInt(firstNumber)
-    const second = parseInt(secondNumber)
+    const first = parseFloat(firstNumber);
+    const second = parseFloat(secondNumber);
+
+    let result = 0.0;
 
     switch (operator) {
       case "+":
-        setSum(first + second);
-        break
+        result = first + second;
+        break;
 
       case "-":
-        setSum(first - second);
-        break
+        result = first - second;
+        break;
 
       case "*":
-        setSum(first * second);
-        break
+        result = first * second;
+        break;
 
       case "÷":
-        setSum(first / second);
-        break
+        result = first / second;
+        break;
 
       default:
-        setSum(-1);
-        break
+        result = -1.0;
+        break;
     }
+
+    // setSum(result.toFixed(4))
+    setSum(result);
   }
 
   function handleStoreValue() {
-    setStoredValue(sum.toString())
+    setStoredValue(sum.toString());
   }
 
   return (
     <div className="calculator">
-
-      <Numpad number={firstNumber} setNumber={setFirstNumber} storedValue={storedValue}/>
+      <Numpad
+        number={firstNumber}
+        setNumber={setFirstNumber}
+        storedValue={storedValue}
+      />
 
       <div className="panel">
         <p>{operator}</p>
@@ -63,8 +71,12 @@ function App() {
         </div>
       </div>
 
-      <Numpad number={secondNumber} setNumber={setSecondNumber} storedValue={storedValue}/>
-  
+      <Numpad
+        number={secondNumber}
+        setNumber={setSecondNumber}
+        storedValue={storedValue}
+      />
+
       <div className="panel answer">
         <p>{sum}</p>
         <div>
@@ -73,7 +85,7 @@ function App() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default App;
