@@ -1,45 +1,12 @@
 import { useState } from "react";
 import "./App.css";
+import Numpad from "./components/Numpad";
 
 function App() {
-  const [firstNumber, setFirstNumber] = useState(0);
-  const [secondNumber, setSecondNumber] = useState(0);
+  const [firstNumber, setFirstNumber] = useState('0');
+  const [secondNumber, setSecondNumber] = useState('0');
   const [operator, setOperator] = useState("+");
   const [sum, setSum] = useState(0);
-
-  function handleNumber(e) {
-    // Ignore clicks on div container
-    if (e.target.getAttribute("class") === "numbers") {
-      return;
-    }
-
-    // Get the digit from the
-    let number = e.target.textContent;
-
-    // Handle Clear button press
-    // TODO: Would be better to handle it with event handle click?
-    if (number == 'Clear') {
-      handleClear(e)
-      return
-    }
-
-    // Check if first or second number should be updated
-    const parentClass = e.currentTarget.getAttribute("id");
-    parentClass === "first-number"
-      ? setFirstNumber(number)
-      : setSecondNumber(number);
-
-    // Update number
-    if (parentClass === "first-number") {
-      // Append digit if not 0
-      number = firstNumber === 0 ? number : firstNumber + number;
-      setFirstNumber(number);
-    } else if (parentClass === "second-number") {
-      // Append digit if not 0
-      number = secondNumber === 0 ? number : secondNumber + number;
-      setSecondNumber(number);
-    }
-  }
 
   function handleOperator(e) {
     // Ignore clicks on div container
@@ -76,39 +43,10 @@ function App() {
     }
   }
 
-  function handleClear(e) {
-    
-
-    // Check if first or second number should be updated
-    const parentClass = e.currentTarget.getAttribute("id")
-
-    // Update number
-    if (parentClass === "first-number") {
-      // Append digit if not 0
-      setFirstNumber(0);
-    } else if (parentClass === "second-number") {
-      setSecondNumber(0);
-    }
-  }
-
   return (
     <div className="calculator">
-      <div className="panel">
-        <p>{firstNumber}</p>
-        <div className="numbers" id="first-number" onClick={handleNumber}>
-          <button>1</button>
-          <button>2</button>
-          <button>3</button>
-          <button>4</button>
-          <button>5</button>
-          <button>6</button>
-          <button>7</button>
-          <button>8</button>
-          <button>9</button>
-          <button>0</button>
-          <button>Clear</button>
-        </div>
-      </div>
+
+      <Numpad number={firstNumber} setNumber={setFirstNumber}/>
 
       <div className="panel">
         <p>{operator}</p>
@@ -120,22 +58,8 @@ function App() {
         </div>
       </div>
 
-      <div className="panel">
-        <p>{secondNumber}</p>
-        <div className="numbers" id="second-number" onClick={handleNumber}>
-          <button>1</button>
-          <button>2</button>
-          <button>3</button>
-          <button>4</button>
-          <button>5</button>
-          <button>6</button>
-          <button>7</button>
-          <button>8</button>
-          <button>9</button>
-          <button>0</button>
-          <button>Clear</button>
-        </div>
-      </div>
+      <Numpad number={secondNumber} setNumber={setSecondNumber}/>
+  
       <div className="panel answer">
         <p>{sum}</p>
         <div>
